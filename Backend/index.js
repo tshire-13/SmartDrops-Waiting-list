@@ -5,6 +5,9 @@ import admin from 'firebase-admin';
 import firebaseConfig from "./FireBaseConfig.js";
 import cors from "cors";
 import bodyParser from "body-parser";
+import multer from "multer";
+
+const storage = multer.memoryStorage();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -49,10 +52,22 @@ app.get('/list', async(req, res) => {
 
 })
 
-app.post('/list', upload.single('Name'), async(req, res) => {
+app.post("/list", async (req, res) => {
   try {
-  
-    const file = req.file
+    const { Name, email } = req.body || {}; 
+
+    if (!Name || !email) {
+      return res.status(400).json({ error: "Name is required" });
+    }
+
+    const docRef = await db.collection("SmartDrops-Waiting-list").add({
+      name: Name,
+      email: email,
+    });
+
+    res.status(200).json({ message: "Added to waiting list", id: docRef.id });
+
+     const file = req.file
     const body = req.body
 
     await collection.add(body)
@@ -62,12 +77,11 @@ app.post('/list', upload.single('Name'), async(req, res) => {
     console.log("Data saved to Firestore with ID:", collection.id);
     res.status(201).json({ id: collection.id });
     res.send({})
-
-  } catch (error) {
     
-    console.error('Error adding user:', error.message)
-    res.status(500).json({ error: error.message})
-  
+  } catch (error) {
+    console.error(error);
+    console.log(error);
+    res.status(500).json({ error: "Failed to add entry" });
   }
 })
 
