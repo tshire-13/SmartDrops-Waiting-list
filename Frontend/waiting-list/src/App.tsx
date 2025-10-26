@@ -12,7 +12,7 @@ function App() {
   };
   function handleSubmit(event: React.FormEvent<HTMLFormElement>){
     event.preventDefault()
-    console.log(post)
+    // console.log(post)
 
     axios.post('https://smartdrops-waiting-list.onrender.com/list', post, {
       headers: { 'Content-Type': 'application/json'}
