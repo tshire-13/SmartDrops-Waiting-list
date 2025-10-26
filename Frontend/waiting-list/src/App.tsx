@@ -7,10 +7,10 @@ function App() {
     Name: '',
     email: ''
   })
-  const handleInput = (event) => {
-    setPost({...post, [event.target.name]: event.target.value})
-  }
-  function handleSubmit(event){
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPost({ ...post, [event.target.name]: event.target.value });
+  };
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>){
     event.preventDefault()
     console.log(post)
 
@@ -19,6 +19,7 @@ function App() {
     })
     .then(response => {
       console.log(response)
+      alert("Thank you for submitting details");
     })
     .catch((err) => {
       console.log(err)
@@ -33,7 +34,7 @@ function App() {
           <h1>Smart Drops Witing List</h1>
           Name: <input type="text" onChange={handleInput} name="Name" /><br /><br />
           email: <input type="email" onChange={handleInput} name="email" /><br /><br />
-          <button>Submit</button>
+          <button type='submit'>Submit</button>
         </form>
        </div>
       </div>
