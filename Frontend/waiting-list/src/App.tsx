@@ -19,7 +19,7 @@ function App() {
     })
     .then(response => {
       console.log(response)
-      alert("Thank you for submitting details");
+      alert("Thank you!!");
     })
     .catch((err) => {
       console.log(err)
