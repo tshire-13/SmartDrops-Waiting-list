@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 import dotenv from 'dotenv';
 import admin from 'firebase-admin';
-import firebaseConfig from "./FireBaseConfig.js";
+// import firebaseConfig from "./FireBaseConfig.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 import multer from "multer";
