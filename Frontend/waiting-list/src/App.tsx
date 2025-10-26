@@ -30,6 +30,7 @@ function App() {
       <div>
        <div>
         <form onSubmit={handleSubmit}>
+          <h1>Smart Drops Witing List</h1>
           Name: <input type="text" onChange={handleInput} name="Name" /><br /><br />
           email: <input type="email" onChange={handleInput} name="email" /><br /><br />
           <button>Submit</button>
