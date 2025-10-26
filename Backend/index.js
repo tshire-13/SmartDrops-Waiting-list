@@ -54,29 +54,27 @@ app.get('/list', async(req, res) => {
 
 app.post("/list", async (req, res) => {
   try {
-    const { Name, email } = req.body || {}; 
+    const { Name, email, province } = req.body || {}; 
 
-    if (!Name || !email) {
-      return res.status(400).json({ error: "Name is required" });
+    if (!Name || !email || !province) {
+      return res.status(400).json({ error: "Fields are required" });
     }
 
     const docRef = await db.collection("SmartDrops-Waiting-list").add({
       name: Name,
       email: email,
+      province: province,
     });
 
+
+    console.log("Data sent to Firestore:", req.body);
+    if (req.file) console.log("Uploaded file info:", req.file);
+     
     res.status(200).json({ message: "Added to waiting list", id: docRef.id });
 
-     const file = req.file
-    const body = req.body
-
-    await collection.add(body)
-
-    console.log("Data sent to Firestore:", req.body)
-    console.log("Uploaded file info:", req.file)
-    console.log("Data saved to Firestore with ID:", collection.id);
-    res.status(201).json({ id: collection.id });
-    res.send({})
+    // console.log("Data saved to Firestore with ID:", collection.id);
+    // res.status(201).json({ id: collection.id });
+    // res.send({})
     
   } catch (error) {
     console.error(error);
@@ -86,6 +84,6 @@ app.post("/list", async (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at ${port}`);
 });
 
