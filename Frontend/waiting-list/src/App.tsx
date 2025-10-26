@@ -14,7 +14,7 @@ function App() {
     event.preventDefault()
     console.log(post)
 
-    axios.post('http://localhost:3000/list', post, {
+    axios.post('https://smartdrops-waiting-list.onrender.com/list', post, {
       headers: { 'Content-Type': 'application/json'}
     })
     .then(response => {
